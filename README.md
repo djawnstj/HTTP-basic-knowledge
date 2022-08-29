@@ -277,18 +277,40 @@ start-line = request-line/status-line
   - 일시 리다이렉션: 일시적 변경(302, 307, 303)
     - 예: 주문 완료 후 주문 내역 화면으로 이동
     - PRG: Post/Redirect/Get
-  - 특수 리다이렉션: 결과 대신 캐시를 사용
+  - 특수 리다이렉션: 결과 대신 캐시를 사용(300, 304)
 - 요청을 완료하기 위해 유저 에이전트의 추가 조치 필요
 - 대표 코드
   - 300: Multiple Choices
   - 301: Moved Permanently
-  - 302: Found
-  - 303: See Other
-  - 304: Not Modified
-  - 307: Temporary Redirect
+  - 302: Found(GET으로 변경하여 리다이렉트할 수 있음)
+  - 303: See Other(GET으로 변경하여 리다이렉트)
+  - 304: Not Modified(수정사항이 없으니 캐시를 이용하라 코드)
+  - 307: Temporary Redirect(Method를 변경하면 안됨)
   - 308: Permanent Redirect
   
+### 4XX
+- Client Error
+- 클라이언트의 요청에 잘못된 문법등으로 서버가 요청을 수행할 수 없음
+- 오류의 원인이 클라이언트에 있음
+- **클라이언트가 이미 잘못된 요청, 데이터를 보내고 있기 때문에, 똑같은 재시도가 실패함**
+- 대표 코드
+  - 400: Bad Request(요청 파라미터가 잘못되거나 API 스펙이 맞지 않음)
+  - 401: Unauthorized(클라이언트가 해당 리소스에 대한 인증이 필요함)
+  - 403: Forbidden(서버가 승인을 거부함)
+  - 404: Not Found(요청 리소스를 찾을 수 없음)
+  
+### 5XX
+- Server Error
+- 서버 문제로 오류 발생
+- 대표 코드
+  - 500: Internal Server Error(서버 문제로 오류 발생)
+  - 503: Service Unavailable(서비스 이용 불가)
+
+  
 ---
+
+# 배운점
+처음 보는 코드들이 많았고, 세션 적용할때 코드를 잘못 적용했음.
 
 # 추가로 공부해야할 내용
 - 이더넷 프레임
