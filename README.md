@@ -305,7 +305,61 @@ start-line = request-line/status-line
 - 대표 코드
   - 500: Internal Server Error(서버 문제로 오류 발생)
   - 503: Service Unavailable(서비스 이용 불가)
+  
+## Header
 
+### 표현(Representation)
+- Content-Type: 표현 데이터의 형식
+  - 미디어 타입, 문자 인코딩
+  - 예)
+    - text/html; charet=utf-8
+    - application/json
+    - image/png
+- Content-Encoding: 표현 데이터의 압축 방식
+  - 데이터를 전달하는 곳에서 압축 후 인코딩 헤더 추가
+  - 데이터를 읽는 쪽에서 인코딩 헤더의 정보로 압축 해제
+- Content-Language: 표현 데이터의 자연 언어
+  - 예)
+    - ko
+    - en
+    - en-US
+- Content-Length: 표현 데이터의 길이
+  - 바이트 단위
+  - Transfer-Encoding을 사용하면 Content-Length를 사용하면 안됨
+
+### 협상(콘텐츠 네고시에이션)
+클라이언트가 선호하는 표현 요청
+- Accept: 클라이언트가 선호하는 미디어 타입 전달
+- Accept-Charset: 클라이언트가 선호하는 문자 인코딩
+- Accept-Encoding: 클라이언트가 선호하는 압축 인코딩
+- Accept-Language: 클라이언트가 선호하는 자연 언어
+- 협상 헤더는 요청시에만 사용
+
+#### 협상과 우선순위
+Quality Vaules(q)
+
+1. 0~1, 클수록 우선순위
+   - 생략하면 1
+   - Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+     1. ko-KR;q=1(생략)
+     2. ko;q=0.9
+     3. en-US;q=0.8
+     4. en;q=0.7
+ 2. 구체적인것이 우선
+    - Accept: text/* text/plain, text/plain;format=flowed, \*/\*
+      1. text/plain;format=flowed
+      2. text/plain
+      3. text/*
+      4. \*/\*
+ 3. 구체적인것을 미디어타입을 맞춘다
+    - Accept: text/\*;q=0.3, text/html;q=0.7, text/html;level=1, text/html;level=2;q=0.4, \*/\*;q=0.5
+    
+### 전송 방식
+- 단순 전송
+- 압축 전송
+- 분할 전송
+- 범위 전송
+  
   
 ---
 
